@@ -273,7 +273,7 @@ public final class GifDecoder {
 			// Handle disposal, prepare current BufferedImage for drawing
 			switch (prevDisposal) {
 			case 2: // Next frame draws on background canvas
-				final BufferedImage bgImage = prevImg;
+				final BufferedImage bgImage = img;
 				final int[] px = getPixels(bgImage);
 				//fill the prev frame area with background color,
 				//NOT to fill the whole image or will cause bug 
@@ -284,7 +284,6 @@ public final class GifDecoder {
 					startpxindex+=bgimgwidth;
 					Arrays.fill(px,startpxindex,startpxindex+previmgwidth,bgCol);
 				}
-				prevImg = img; // Let previous point to current, dispose current
 				img = bgImage; // Let current point to background image
 				break;
 			case 3: // Next frame draws on previous frame, so restore previous
